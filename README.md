@@ -229,3 +229,7 @@ If you use this repository, please cite the associated paper.
 ## Contact
 
 For questions about the benchmark, implementation, or the associated paper, please contact Angad Singh Ahuja at [ahujaangadsingh@gmail.com]
+
+## Acknowledgements
+
+Parts of this repository were developed with the assistance of Claude 4.6 Opus and OpenAI Codex namely GPT 5.4 Thinking with human supervision and verification at each step.
