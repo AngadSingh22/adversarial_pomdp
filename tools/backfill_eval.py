@@ -50,7 +50,7 @@ def backfill(model_dir: Path, n_episodes: int, n_envs: int, seed: int) -> None:
             ts = int(''.join(filter(str.isdigit, ckpt.stem)))
         except Exception:
             ts = -1
-        record = EvalRecord(regime='BACKFILL', seed=seed, timesteps=ts, generation=None, git_hash=_git, timestamp=time.strftime('%Y-%m-%dT%H:%M:%S'), cli_args={'checkpoint': str(ckpt), 'n_episodes': n_episodes}, stats={k: vars(v) for k, v in stats.items()}, robust_gap=round(stats.get('SPREAD', stats.get('EDGE', list(stats.values())[0])).mean - stats['UNIFORM'].mean, 4), robust_gap_p90=round(stats.get('SPREAD', stats.get('EDGE', list(stats.values())[0])).p90 - stats['UNIFORM'].p90, 4), exploitability_defender=None, exploitability_attacker=None, uniform_drift=None, worst_D_k_mean=None, defender_budget=None, policy=vars(diag), defender_shift=None)
+        record = EvalRecord(regime='BACKFILL', seed=seed, timesteps=ts, generation=None, git_hash=_git, timestamp=time.strftime('%Y-%m-%dT%H:%M:%S'), cli_args={'checkpoint': str(ckpt), 'n_episodes': n_episodes}, stats={k: vars(v) for k, v in stats.items()}, robust_gap=round(stats.get('SPREAD', stats.get('EDGE', list(stats.values())[0])).mean - stats['UNIFORM'].mean, 4), robust_gap_p95=round(stats.get('SPREAD', stats.get('EDGE', list(stats.values())[0])).p95 - stats['UNIFORM'].p95, 4), exploitability_defender=None, exploitability_attacker=None, uniform_drift=None, worst_D_k_mean=None, defender_budget=None, policy=vars(diag), defender_shift=None)
         append_eval_record(record, corrected_jsonl)
         if ckpt.stem == 'final_model':
             final_corrected = {k: vars(v) for k, v in stats.items()}

@@ -34,7 +34,7 @@ class PolicyDiagnostics:
 class DefenderShiftMetrics:
     """"""
     centroid_pairwise_mean: float
-    centroid_pairwise_p90: float
+    centroid_pairwise_p95: float
     cluster_score: float
     marginal_entropy: float
     n_layouts: int
@@ -51,7 +51,7 @@ class EvalRecord:
     cli_args: dict
     stats: dict
     robust_gap: float
-    robust_gap_p90: float
+    robust_gap_p95: float
     exploitability_defender: Optional[float]
     exploitability_attacker: Optional[float]
     uniform_drift: Optional[float]

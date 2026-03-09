@@ -148,7 +148,7 @@ def _format_table(results: dict) -> str:
         if key not in results:
             continue
         d = results[key]
-        rows.append(f'{key.capitalize()} | {d['mean']:.2f} | {d['std']:.2f} | {d['p90']:.2f} | {d['fail_rate']:.2f} | {d.get('fallback_rate', 0.0):.2f}')
+        rows.append(f'{key.capitalize()} | {d['mean']:.2f} | {d['std']:.2f} | {d['p95']:.2f} | {d['fail_rate']:.2f} | {d.get('fallback_rate', 0.0):.2f}')
         if 'rejections' in d and d['rejections']:
             rej_str = ', '.join((f'{k}: {v}' for k, v in d['rejections'].items()))
             rows.append(f'  └ Rejections ({key}): {rej_str}')

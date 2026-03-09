@@ -109,7 +109,7 @@ def evaluate_attacker_scripted(attacker: MaskablePPO, n_episodes: int=100, seed:
         finally:
             env.close()
         arr = np.array(lengths)
-        results[name] = {'mean': float(arr.mean()), 'p90': float(np.percentile(arr, 90))}
+        results[name] = {'mean': float(arr.mean()), 'p95': float(np.percentile(arr, 95))}
     return results
 
 def evaluate_attacker_on_learned_defender(attacker: MaskablePPO, defender_model: PPO, layout_pool: np.ndarray, n_episodes: int=50, seed: int=9999) -> dict:
@@ -126,7 +126,7 @@ def evaluate_attacker_on_learned_defender(attacker: MaskablePPO, defender_model:
         mean_shots, ep_shots = evaluate_attacker_on_layout(layout=layout, attacker_policy=attacker, k_episodes=1, board_size=BOARD_SIZE, ships=SHIPS, seed=seed + ep)
         lengths.append(ep_shots[0])
     arr = np.array(lengths)
-    return {'mean': float(arr.mean()), 'p90': float(np.percentile(arr, 90))}
+    return {'mean': float(arr.mean()), 'p95': float(np.percentile(arr, 95))}
 
 def train_defender(generation: int, frozen_attacker: MaskablePPO, layout_pool: np.ndarray, steps: int, out_dir: Path, max_generations: int, seed: int=BASE_SEED, k_eval: int=1) -> PPO:
     """"""
@@ -232,7 +232,7 @@ def evaluate_generation(generation: int, attacker_before: MaskablePPO, attacker_
         print(f'  [sign check] WARNING: exploitability_defender={defender_adversarial:+.3f} should be >0 (D_k should be harder than UNIFORM)')
     if attacker_adaptation > 0:
         print(f'  [sign check] WARNING: exploitability_attacker={attacker_adaptation:+.3f} should be <0 (A_k should improve vs D_k)')
-    results = {'generation': generation, 'before': {'scripted_modes': {k: {'mean': v.mean, 'p90': v.p90} for k, v in before_scripted_stats.items()}, 'vs_D_k': {'mean': dk_b, 'p90': before_dk_stats.get('D_k', before_scripted_stats['UNIFORM']).p90}}, 'after': {'scripted_modes': {k: {'mean': v.mean, 'p90': v.p90} for k, v in after_stats.items()}, 'vs_D_k': {'mean': dk_a, 'p90': after_stats.get('D_k', after_stats['UNIFORM']).p90}}, 'checks': {'defender_adversarial': defender_adversarial, 'attacker_adaptation': attacker_adaptation, 'uniform_drift': uniform_drift, 'delta_spread_vs_uniform': sp_a - un_a}}
+    results = {'generation': generation, 'before': {'scripted_modes': {k: {'mean': v.mean, 'p95': v.p95} for k, v in before_scripted_stats.items()}, 'vs_D_k': {'mean': dk_b, 'p95': before_dk_stats.get('D_k', before_scripted_stats['UNIFORM']).p95}}, 'after': {'scripted_modes': {k: {'mean': v.mean, 'p95': v.p95} for k, v in after_stats.items()}, 'vs_D_k': {'mean': dk_a, 'p95': after_stats.get('D_k', after_stats['UNIFORM']).p95}}, 'checks': {'defender_adversarial': defender_adversarial, 'attacker_adaptation': attacker_adaptation, 'uniform_drift': uniform_drift, 'delta_spread_vs_uniform': sp_a - un_a}}
     out_path = out_dir / f'eval_gen_{generation}.json'
     with open(out_path, 'w') as f:
         json.dump(results, f, indent=2)
@@ -255,7 +255,7 @@ def evaluate_generation(generation: int, attacker_before: MaskablePPO, attacker_
         stats['D_k_before'] = _ds_to_dict(before_dk_stats['D_k'])
     for name, ds in after_stats.items():
         stats[f'{name}_after'] = _ds_to_dict(ds)
-    record = EvalRecord(regime='IBR', seed=seed if seed is not None else BASE_SEED, timesteps=generation * 1000000, generation=generation, git_hash=git_hash if git_hash is not None else 'unknown', timestamp=time.strftime('%Y-%m-%dT%H:%M:%S'), cli_args=cli_args if cli_args is not None else {}, stats=stats, robust_gap=round(sp_a - un_a, 4), robust_gap_p90=round(after_stats['SPREAD'].p90 - after_stats['UNIFORM'].p90, 4), exploitability_defender=round(defender_adversarial, 4), exploitability_attacker=round(attacker_adaptation, 4), uniform_drift=round(uniform_drift, 4), worst_D_k_mean=None, defender_budget=defender_budget, policy=vars(after_diag), defender_shift=vars(shift) if shift is not None else None)
+    record = EvalRecord(regime='IBR', seed=seed if seed is not None else BASE_SEED, timesteps=generation * 1000000, generation=generation, git_hash=git_hash if git_hash is not None else 'unknown', timestamp=time.strftime('%Y-%m-%dT%H:%M:%S'), cli_args=cli_args if cli_args is not None else {}, stats=stats, robust_gap=round(sp_a - un_a, 4), robust_gap_p95=round(after_stats['SPREAD'].p95 - after_stats['UNIFORM'].p95, 4), exploitability_defender=round(defender_adversarial, 4), exploitability_attacker=round(attacker_adaptation, 4), uniform_drift=round(uniform_drift, 4), worst_D_k_mean=None, defender_budget=defender_budget, policy=vars(after_diag), defender_shift=vars(shift) if shift is not None else None)
     append_eval_record(record, out_dir / 'eval_log.jsonl')
     return results
 ST1_ROOT = Path('results/training/stage1')
@@ -306,13 +306,13 @@ def main():
     parser.add_argument('--init_attacker', default=None, help='Path to Stage 1 attacker checkpoint (.zip). If omitted, auto-selects the regime with lowest SPREAD mean from results/training/stage1/*/final_eval.json.')
     parser.add_argument('--generations', type=int, default=3)
     parser.add_argument('--attacker_steps', type=int, default=1000000)
-    parser.add_argument('--defender_steps', type=int, default=30000, help='PPO steps for defender training per generation. Keep small (30k-50k) — each step runs k_eval attacker rollouts.')
+    parser.add_argument('--defender_steps', type=int, default=50000, help='PPO steps for defender training per generation. Keep small (30k-50k) — each step runs k_eval attacker rollouts.')
     parser.add_argument('--k_eval', type=int, default=1, help='Attacker rollouts per defender env step (default 1). Higher = more signal but O(k_eval) slower defender training.')
     parser.add_argument('--pool_size', type=int, default=POOL_SIZE)
     parser.add_argument('--seed', type=int, default=BASE_SEED)
     parser.add_argument('--n_eval_eps', type=int, default=100)
-    parser.add_argument('--uniform_weight', type=float, default=0.33, help='Fraction of attacker training envs using UNIFORM defender (default 0.33)')
-    parser.add_argument('--spread_weight', type=float, default=0.17, help='Fraction of attacker training envs using SPREAD defender (default 0.17). Remaining fraction goes to D_k (learned).')
+    parser.add_argument('--uniform_weight', type=float, default=0.50, help='Fraction of attacker training envs using UNIFORM defender (default 0.50)')
+    parser.add_argument('--spread_weight', type=float, default=0.0, help='Fraction of attacker training envs using SPREAD defender (default 0.0). Remaining fraction goes to D_k (learned).')
     parser.add_argument('--out_dir', type=str, default='results/training/stage2', help='Output directory for all artifacts (default: results/training/stage2)')
     parser.add_argument('--dk_extract_n', type=int, default=5000, help='Number of samples to extract for the empirical D_k distribution (default 5000)')
     args = parser.parse_args()

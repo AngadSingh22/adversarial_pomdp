@@ -102,8 +102,8 @@ def plot_tail_curves(records: list[dict], out_path: Path) -> None:
     grouped = group_by_regime(records)
     regime_order = ['A', 'B', 'C', 'IBR']
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-    fig.suptitle('Tail Performance: p90 and CVaR(0.1) — lower is better', fontsize=14, fontweight='bold')
-    for ax, (mode_key, stat_key, y_label) in zip(axes, [('SPREAD', 'p90', 'p90 of τ under SPREAD'), ('SPREAD', 'cvar_10', 'CVaR(0.1) of τ under SPREAD')]):
+    fig.suptitle('Tail Performance: p95 and CVaR(0.1) — lower is better', fontsize=14, fontweight='bold')
+    for ax, (mode_key, stat_key, y_label) in zip(axes, [('SPREAD', 'p95', 'p95 of τ under SPREAD'), ('SPREAD', 'cvar_10', 'CVaR(0.1) of τ under SPREAD')]):
         ax.set_title(f'{mode_key} — {stat_key}', fontsize=12)
         ax.set_ylabel(y_label)
         x_positions = np.arange(len(regime_order))

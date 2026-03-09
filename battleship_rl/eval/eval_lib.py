@@ -33,8 +33,8 @@ def _distribution_stats(lengths: list[int], trunc_count: int, total_eps: int, n_
     arr = np.array(lengths, dtype=np.float64)
     rng = np.random.default_rng(7)
     ci_mean = bootstrap_ci(arr, np.mean, n_bootstrap=n_bootstrap, rng=rng)
-    ci_p90 = bootstrap_ci(arr, lambda x: np.percentile(x, 90), n_bootstrap=n_bootstrap, rng=rng)
-    return DistributionStats(mean=round(float(arr.mean()), 4), std=round(float(arr.std()), 4), p90=round(float(np.percentile(arr, 90)), 4), p95=round(float(np.percentile(arr, 95)), 4), cvar_10=round(cvar(arr, alpha=0.1), 4), fail_rate=round(trunc_count / max(total_eps, 1), 6), n_episodes=len(lengths), ci_mean_lo=round(ci_mean[0], 4), ci_mean_hi=round(ci_mean[1], 4), ci_p90_lo=round(ci_p90[0], 4), ci_p90_hi=round(ci_p90[1], 4), trunc_reason=trunc_reason if trunc_reason is not None else {'time_limit': 0, 'invalid_action': 0, 'other': 0})
+    ci_p95 = bootstrap_ci(arr, lambda x: np.percentile(x, 95), n_bootstrap=n_bootstrap, rng=rng)
+    return DistributionStats(mean=round(float(arr.mean()), 4), std=round(float(arr.std()), 4), p95=round(float(np.percentile(arr, 95)), 4), cvar_10=round(cvar(arr, alpha=0.1), 4), fail_rate=round(trunc_count / max(total_eps, 1), 6), n_episodes=len(lengths), ci_mean_lo=round(ci_mean[0], 4), ci_mean_hi=round(ci_mean[1], 4), ci_p95_lo=round(ci_p95[0], 4), ci_p95_hi=round(ci_p95[1], 4), trunc_reason=trunc_reason if trunc_reason is not None else {'time_limit': 0, 'invalid_action': 0, 'other': 0})
 
 def _masked_entropy_from_logits(logits: np.ndarray, mask: np.ndarray) -> float:
     """"""
@@ -195,4 +195,4 @@ def defender_shift_metrics(dk_layouts: np.ndarray, uniform_layouts: np.ndarray, 
     p = occ_marginal.mean(axis=0).ravel()
     eps = 1e-08
     marg_entropy = float(-np.sum(p * np.log(p + eps) + (1 - p) * np.log(1 - p + eps)) / len(p))
-    return DefenderShiftMetrics(centroid_pairwise_mean=round(float(dk_dists.mean()) if len(dk_dists) > 0 else 0.0, 4), centroid_pairwise_p90=round(float(np.percentile(dk_dists, 90)) if len(dk_dists) > 0 else 0.0, 4), cluster_score=round(float(dk_clusters.mean()), 4), marginal_entropy=round(marg_entropy, 4), n_layouts=len(dk_layouts))
+    return DefenderShiftMetrics(centroid_pairwise_mean=round(float(dk_dists.mean()) if len(dk_dists) > 0 else 0.0, 4), centroid_pairwise_p95=round(float(np.percentile(dk_dists, 95)) if len(dk_dists) > 0 else 0.0, 4), cluster_score=round(float(dk_clusters.mean()), 4), marginal_entropy=round(marg_entropy, 4), n_layouts=len(dk_layouts))

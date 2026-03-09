@@ -232,4 +232,4 @@ For questions about the benchmark, implementation, or the associated paper, plea
 
 ## Acknowledgements
 
-Parts of this repository were developed with the assistance of Claude 4.6 Opus and OpenAI Codex namely GPT 5.4 Thinking with human supervision and verification at each step.
+Parts of this repository were developed with the assistance of ChatGPT (GPT-5.4 Thinking) and OpenAI Codex, under human supervision and verification at each step.

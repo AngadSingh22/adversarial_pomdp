@@ -48,7 +48,7 @@ def test_ibr_smoke(tmp_path):
     mean_shots2, shot_list2 = _eval(pool[0], attacker, k_episodes=2, board_size=10, seed=0)
     assert mean_shots2 > 0
     assert len(shot_list2) == 2
-    eval_result = {'generation': 1, 'scripted_modes': {'UNIFORM': {'mean': mean_shots2, 'p90': float(np.percentile(shot_list2, 90))}}, 'vs_learned_D_k': {'mean': mean_shots2, 'p90': float(np.percentile(shot_list2, 90))}, 'exploitability_proxy': 0.0}
+    eval_result = {'generation': 1, 'scripted_modes': {'UNIFORM': {'mean': mean_shots2, 'p95': float(np.percentile(shot_list2, 95))}}, 'vs_learned_D_k': {'mean': mean_shots2, 'p95': float(np.percentile(shot_list2, 95))}, 'exploitability_proxy': 0.0}
     eval_path = out_dir / 'eval_gen_1.json'
     eval_path.write_text(json.dumps(eval_result))
     assert defender_path.exists(), 'defender checkpoint missing'

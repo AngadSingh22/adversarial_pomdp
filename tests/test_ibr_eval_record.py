@@ -71,7 +71,7 @@ class TestEvalRecordJSONL:
     def test_roundtrip(self, tmp_path):
         from battleship_rl.eval import append_eval_record
         ds = _make_real_dist_stats()
-        record = EvalRecord(regime='IBR', seed=42, timesteps=1000000, generation=1, git_hash='test', timestamp='2026-01-01T00:00:00', cli_args={}, stats={'UNIFORM_before': vars(ds), 'UNIFORM_after': vars(ds), 'D_k_after': vars(ds)}, robust_gap=1.5, robust_gap_p90=2.0, exploitability_defender=0.5, exploitability_attacker=-1.2, uniform_drift=-0.3, worst_D_k_mean=None, defender_budget=50000, policy={'action_entropy': 3.5, 'adjacency_ratio': 0.6, 'time_to_first_hit': 12.3, 'time_to_first_sink': 45.0, 'invalid_action_rate': 0.0}, defender_shift=None)
+        record = EvalRecord(regime='IBR', seed=42, timesteps=1000000, generation=1, git_hash='test', timestamp='2026-01-01T00:00:00', cli_args={}, stats={'UNIFORM_before': vars(ds), 'UNIFORM_after': vars(ds), 'D_k_after': vars(ds)}, robust_gap=1.5, robust_gap_p95=2.0, exploitability_defender=0.5, exploitability_attacker=-1.2, uniform_drift=-0.3, worst_D_k_mean=None, defender_budget=50000, policy={'action_entropy': 3.5, 'adjacency_ratio': 0.6, 'time_to_first_hit': 12.3, 'time_to_first_sink': 45.0, 'invalid_action_rate': 0.0}, defender_shift=None)
         out = tmp_path / 'eval_log.jsonl'
         append_eval_record(record, out)
         row = json.loads(out.read_text().strip().split('\n')[0])

@@ -104,12 +104,12 @@ class TimestepEvalCallback(BaseCallback):
         stats_dict, diagnostics = run_eval(model=self.model, mode_map=modes, n_episodes=n_eps, n_envs=self.n_envs, seed_offset=seed_off, collect_diagnostics=True, n_bootstrap=n_bs)
         for name, s in stats_dict.items():
             if self.verbose:
-                print(f'  [{name:7s}] mean={s.mean:.1f}  p90={s.p90:.1f}  CVaR={s.cvar_10:.1f}  fail={s.fail_rate:.4f}  CI=[{s.ci_mean_lo:.1f},{s.ci_mean_hi:.1f}]')
+                print(f'  [{name:7s}] mean={s.mean:.1f}  p95={s.p95:.1f}  CVaR={s.cvar_10:.1f}  fail={s.fail_rate:.4f}  CI=[{s.ci_mean_lo:.1f},{s.ci_mean_hi:.1f}]')
         u = stats_dict.get('UNIFORM')
         sp = stats_dict.get('SPREAD')
         robust_gap = round(sp.mean - u.mean, 4) if u and sp else 0.0
-        robust_gap_p90 = round(sp.p90 - u.p90, 4) if u and sp else 0.0
-        record = EvalRecord(regime=self.regime, seed=self.seed, timesteps=timesteps, generation=0, git_hash=self.git_hash, timestamp=_time.strftime('%Y-%m-%dT%H:%M:%S'), cli_args=self.cli_args, stats={k: vars(v) for k, v in stats_dict.items()}, robust_gap=robust_gap, robust_gap_p90=robust_gap_p90, exploitability_defender=None, exploitability_attacker=None, uniform_drift=None, worst_D_k_mean=None, policy=vars(diagnostics), defender_shift=None)
+        robust_gap_p95 = round(sp.p95 - u.p95, 4) if u and sp else 0.0
+        record = EvalRecord(regime=self.regime, seed=self.seed, timesteps=timesteps, generation=0, git_hash=self.git_hash, timestamp=_time.strftime('%Y-%m-%dT%H:%M:%S'), cli_args=self.cli_args, stats={k: vars(v) for k, v in stats_dict.items()}, robust_gap=robust_gap, robust_gap_p95=robust_gap_p95, exploitability_defender=None, exploitability_attacker=None, uniform_drift=None, worst_D_k_mean=None, policy=vars(diagnostics), defender_shift=None)
         append_eval_record(record, self.log_path)
         if self.verbose:
             print(f'  [eval record] written → {self.log_path}')
@@ -167,9 +167,9 @@ def _final_eval(model, out_dir: Path, n_episodes: int, n_envs: int, regime: str,
     stats_dict, diagnostics = run_eval(model=model, mode_map={'UNIFORM': UniformRandomDefender, 'EDGE': EdgeBiasedDefender, 'CLUSTER': ClusteredDefender, 'SPREAD': SpreadDefender, 'PARITY': ParityDefender}, n_episodes=n_episodes, n_envs=n_envs, seed_offset=BASE_SEED + 8000, collect_diagnostics=True, n_bootstrap=2000)
     for name, s in stats_dict.items():
         flag = '  ⚠ fail_rate > 0' if s.fail_rate > 0 else ''
-        print(f'  [{name:7s}] mean={s.mean:.1f}  p90={s.p90:.1f}  CVaR={s.cvar_10:.1f}  fail={s.fail_rate:.4f}  CI=[{s.ci_mean_lo:.1f},{s.ci_mean_hi:.1f}]{flag}')
+        print(f'  [{name:7s}] mean={s.mean:.1f}  p95={s.p95:.1f}  CVaR={s.cvar_10:.1f}  fail={s.fail_rate:.4f}  CI=[{s.ci_mean_lo:.1f},{s.ci_mean_hi:.1f}]{flag}')
     import json as _json
-    legacy = {k: {'mean': v.mean, 'p90': v.p90, 'fail_rate': v.fail_rate} for k, v in stats_dict.items()}
+    legacy = {k: {'mean': v.mean, 'p95': v.p95, 'fail_rate': v.fail_rate} for k, v in stats_dict.items()}
     (out_dir / 'final_eval.json').write_text(_json.dumps(legacy, indent=2))
     print(f'  Saved → {out_dir / 'final_eval.json'}')
 
