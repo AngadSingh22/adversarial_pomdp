@@ -1,0 +1,14 @@
+[project]
+name = "battleship-rl"
+version = "0.1.0"
+description = "Battleship RL environment"
+dependencies = [
+    "gymnasium",
+    "stable-baselines3>=2.2",
+    "sb3-contrib>=2.2",
+    "torch",
+    "numpy",
+]
+
+[tool.setuptools]
+packages = ["battleship_rl"]
