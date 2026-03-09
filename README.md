@@ -228,4 +228,4 @@ If you use this repository, please cite the associated paper.
 
 ## Contact
 
-For questions about the benchmark, implementation, or the associated paper, please contact Angad Singh Ahuja.
+For questions about the benchmark, implementation, or the associated paper, please contact Angad Singh Ahuja at [ahujaangadsingh@gmail.com]
