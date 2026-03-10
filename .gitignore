@@ -20,3 +20,4 @@ csrc/*.so
 *.log
 .DS_Store
 formulation/paper/arxiv_template_version/
+formulation/paper/peer_review_math_audit.md
