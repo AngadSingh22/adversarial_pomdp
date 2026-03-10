@@ -1,4 +1,4 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{13}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -33,6 +33,19 @@ Leslie~Pack Kaelbling, Michael~L. Littman, and Anthony~R. Cassandra.
 \newblock \emph{Artificial Intelligence}, 101\penalty0 (1--2):\penalty0
   99--134, 1998.
 \newblock \doi{10.1016/S0004-3702(98)00023-X}.
+
+\bibitem[Chen et~al.(2016)Chen, Frazzoli, Hsu, and Lee]{chen2016pomdplite}
+Min Chen, Emilio Frazzoli, David Hsu, and Wee~Sun Lee.
+\newblock Pomdp-lite for robust robot planning under uncertainty.
+\newblock In \emph{2016 IEEE International Conference on Robotics and
+  Automation}, pages 5427--5433, 2016.
+\newblock \doi{10.1109/ICRA.2016.7487754}.
+
+\bibitem[Osogami(2015)]{osogami2015robust}
+Takayuki Osogami.
+\newblock Robust partially observable markov decision process.
+\newblock In \emph{Proceedings of the 32nd International Conference on Machine
+  Learning}, 2015.
 
 \bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
   Klimov]{schulman2017ppo}

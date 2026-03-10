@@ -6,65 +6,69 @@
 \citation{iyengar2005robust,nilim2005robust}
 \citation{pinto2017robust}
 \citation{kaelbling1998pomdp}
+\citation{chen2016pomdplite,osogami2015robust}
 \citation{schulman2017ppo}
 \citation{rockafellar2000cvar,chow2015cvar}
-\citation{brown1951fictitious,heinrich2016fsp}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\citation{brown1951fictitious,heinrich2016fsp}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodology, Theoretical Development, and Diagnostics}{3}{section.3}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Stage-1 attacker training}}{8}{algorithm.1}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Restricted iterative best response}}{8}{algorithm.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{8}{section.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Stage-1 results aggregated across three seeds. Nominal = UNIFORM; stress = SPREAD. Lower is better.}}{9}{table.caption.1}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Stage-1 attacker training}}{9}{algorithm.1}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Restricted iterative best response}}{9}{algorithm.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{9}{section.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Stage-1 results aggregated across three seeds. Nominal = UNIFORM; stress = SPREAD. Lower is better.}}{10}{table.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:stage1}{{1}{9}{Stage-1 results aggregated across three seeds. Nominal = UNIFORM; stress = SPREAD. Lower is better}{table.caption.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Final Stage-2 iterative best-response diagnostics across three independent seeds. Defender budgets are restricted to 50k steps per generation to simulate a computationally constrained adversarial threat model.}}{9}{table.caption.2}\protected@file@percent }
-\newlabel{tab:ibr}{{2}{9}{Final Stage-2 iterative best-response diagnostics across three independent seeds. Defender budgets are restricted to 50k steps per generation to simulate a computationally constrained adversarial threat model}{table.caption.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Defender-budget ablation. Positive defender\_adversarial implies that the learned defender induces a harder distribution than the nominal distribution for the current attacker.}}{10}{table.caption.3}\protected@file@percent }
-\newlabel{tab:budget}{{3}{10}{Defender-budget ablation. Positive defender\_adversarial implies that the learned defender induces a harder distribution than the nominal distribution for the current attacker}{table.caption.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Scripted defender-shift metrics.}}{10}{table.caption.4}\protected@file@percent }
-\newlabel{tab:defshift}{{4}{10}{Scripted defender-shift metrics}{table.caption.4}{}}
+\newlabel{tab:stage1}{{1}{10}{Stage-1 results aggregated across three seeds. Nominal = UNIFORM; stress = SPREAD. Lower is better}{table.caption.1}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Final Stage-2 iterative best-response diagnostics across three independent seeds. The columns UNIFORM, SPREAD, and $D_k$ report post-update means $\mathbb  {E}_{\rho _U}[\tau (\pi _k)]$, $\mathbb  {E}_{\rho _{\mathrm  {stress}}}[\tau (\pi _k)]$, and $\mathbb  {E}_{\rho _k}[\tau (\pi _k)]$. The diagnostic columns are computed from both pre- and post-update evaluations: $\textsf  {defender\_adversarial}_k=\mathbb  {E}_{\rho _k}[\tau (\pi _{k-1})]-\mathbb  {E}_{\rho _U}[\tau (\pi _{k-1})]$, $\textsf  {attacker\_adaptation}_k=\mathbb  {E}_{\rho _k}[\tau (\pi _k)]-\mathbb  {E}_{\rho _k}[\tau (\pi _{k-1})]$, and $\textsf  {uniform\_drift}_k=\mathbb  {E}_{\rho _U}[\tau (\pi _k)]-\mathbb  {E}_{\rho _U}[\tau (\pi _{k-1})]$. Defender budgets are restricted to 50k steps per generation, with 100 scripted episodes per mode and 50 pre-update $D_k$ episodes.}}{10}{table.caption.2}\protected@file@percent }
+\newlabel{tab:ibr}{{2}{10}{Final Stage-2 iterative best-response diagnostics across three independent seeds. The columns UNIFORM, SPREAD, and $D_k$ report post-update means $\E _{\rho _U}[\tauT (\pi _k)]$, $\E _{\rhoStress }[\tauT (\pi _k)]$, and $\E _{\rho _k}[\tauT (\pi _k)]$. The diagnostic columns are computed from both pre- and post-update evaluations: $\textsf {defender\_adversarial}_k=\E _{\rho _k}[\tauT (\pi _{k-1})]-\E _{\rho _U}[\tauT (\pi _{k-1})]$, $\textsf {attacker\_adaptation}_k=\E _{\rho _k}[\tauT (\pi _k)]-\E _{\rho _k}[\tauT (\pi _{k-1})]$, and $\textsf {uniform\_drift}_k=\E _{\rho _U}[\tauT (\pi _k)]-\E _{\rho _U}[\tauT (\pi _{k-1})]$. Defender budgets are restricted to 50k steps per generation, with 100 scripted episodes per mode and 50 pre-update $D_k$ episodes}{table.caption.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Defender-budget ablation. Positive defender\_adversarial implies that the learned defender induces a harder distribution than the nominal distribution for the current attacker.}}{11}{table.caption.3}\protected@file@percent }
+\newlabel{tab:budget}{{3}{11}{Defender-budget ablation. Positive defender\_adversarial implies that the learned defender induces a harder distribution than the nominal distribution for the current attacker}{table.caption.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Scripted defender-shift metrics.}}{11}{table.caption.4}\protected@file@percent }
+\newlabel{tab:defshift}{{4}{11}{Scripted defender-shift metrics}{table.caption.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Discussion and Future Work}{11}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Limitations}{11}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{12}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Limitations}{12}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{13}{section.7}\protected@file@percent }
 \gdef \LT@i {\LT@entry 
     {1}{115.34666pt}\LT@entry 
     {1}{340.82707pt}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Appendixes}{13}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Notation Table}{13}{appendix.A}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Notation used in the paper.}}{13}{table.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B}Proofs}{13}{appendix.B}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Proof of the latent minimax principle}{13}{subsection.B.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Appendixes}{14}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Notation Table}{14}{appendix.A}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Notation used in the paper.}}{14}{table.5}\protected@file@percent }
 \citation{vonNeumann1928}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Proof of the extreme-point corollary}{14}{subsection.B.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Proof of the approximate best-response certificates}{15}{subsection.B.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Proofs}{15}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Proof of the latent minimax principle}{15}{subsection.B.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Proof of the extreme-point corollary}{15}{subsection.B.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Proof of the approximate best-response certificates}{16}{subsection.B.3}\protected@file@percent }
 \citation{Hoeffding1963}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Proof of finite-sample sign certification}{16}{subsection.B.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}Proof of marginal insufficiency for fixed policies}{17}{subsection.B.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Hyperparameters and Training Metadata}{18}{appendix.C}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Proximal Policy Optimization (PPO) hyperparameters.}}{18}{table.caption.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Additional Baselines}{19}{appendix.D}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Baseline absolute performance (mean shots-to-win $\pm $ standard deviation) against UNIFORM and SPREAD.}}{19}{table.caption.6}\protected@file@percent }
-\newlabel{tab:additional_baselines}{{7}{19}{Baseline absolute performance (mean shots-to-win $\pm $ standard deviation) against UNIFORM and SPREAD}{table.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {E}Training Dynamics and IBR Diagnostics}{20}{appendix.E}\protected@file@percent }
-\newlabel{fig:learning_curves}{{1a}{20}{Stage-1: Attacker learning curves}{figure.caption.7}{}}
-\newlabel{sub@fig:learning_curves}{{a}{20}{Stage-1: Attacker learning curves}{figure.caption.7}{}}
-\newlabel{fig:tail_curves}{{1b}{20}{Stage-1: Tail optimization curves}{figure.caption.7}{}}
-\newlabel{sub@fig:tail_curves}{{b}{20}{Stage-1: Tail optimization curves}{figure.caption.7}{}}
-\newlabel{fig:ibr_generation}{{1c}{20}{Stage-2: Final IBR generation diagnostics}{figure.caption.7}{}}
-\newlabel{sub@fig:ibr_generation}{{c}{20}{Stage-2: Final IBR generation diagnostics}{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Training dynamics and IBR diagnostics averaged over independent seeds. \textbf  {(a)} Fixed-mixture and alternating stress approaches readily acquire nominal proficiency without catastrophic gameplay degradation. \textbf  {(b)} Direct targeted adversarial exposure effectively limits extreme worst-case trajectory vulnerabilities, explicitly lowering tail severity ($\mathrm  {CVaR}_{0.10}$ and $p95$). \textbf  {(c)} In Stage 2, tracked IBR metrics confirm sufficient optimization bandwidth yields positive \textsf  {defender\_adversarial} shifts that provoke direct \textsf  {attacker\_adaptation}, fulfilling the theoretical diagnostic certificates mapping to the latent minimax formulation.}}{20}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:all_diagnostics}{{1}{20}{Training dynamics and IBR diagnostics averaged over independent seeds. \textbf {(a)} Fixed-mixture and alternating stress approaches readily acquire nominal proficiency without catastrophic gameplay degradation. \textbf {(b)} Direct targeted adversarial exposure effectively limits extreme worst-case trajectory vulnerabilities, explicitly lowering tail severity ($\cvar _{0.10}$ and $p95$). \textbf {(c)} In Stage 2, tracked IBR metrics confirm sufficient optimization bandwidth yields positive \textsf {defender\_adversarial} shifts that provoke direct \textsf {attacker\_adaptation}, fulfilling the theoretical diagnostic certificates mapping to the latent minimax formulation}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Proof of finite-sample sign certification}{17}{subsection.B.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}Proof of marginal insufficiency for fixed policies}{18}{subsection.B.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.6}Proof of the supported weakly Pareto-optimality corollary}{19}{subsection.B.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Hyperparameters and Training Metadata}{20}{appendix.C}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Proximal Policy Optimization (PPO) hyperparameters.}}{20}{table.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}Additional Baselines}{21}{appendix.D}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Baseline absolute performance (mean shots-to-win $\pm $ standard deviation) against UNIFORM and SPREAD.}}{21}{table.caption.6}\protected@file@percent }
+\newlabel{tab:additional_baselines}{{7}{21}{Baseline absolute performance (mean shots-to-win $\pm $ standard deviation) against UNIFORM and SPREAD}{table.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {E}Training Dynamics and IBR Diagnostics}{22}{appendix.E}\protected@file@percent }
+\newlabel{fig:learning_curves}{{1a}{22}{Stage-1: Attacker learning curves}{figure.caption.7}{}}
+\newlabel{sub@fig:learning_curves}{{a}{22}{Stage-1: Attacker learning curves}{figure.caption.7}{}}
+\newlabel{fig:tail_curves}{{1b}{22}{Stage-1: Tail optimization curves}{figure.caption.7}{}}
+\newlabel{sub@fig:tail_curves}{{b}{22}{Stage-1: Tail optimization curves}{figure.caption.7}{}}
+\newlabel{fig:ibr_generation}{{1c}{22}{Stage-2: Final IBR generation diagnostics}{figure.caption.7}{}}
+\newlabel{sub@fig:ibr_generation}{{c}{22}{Stage-2: Final IBR generation diagnostics}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Training dynamics and IBR diagnostics averaged over independent seeds. \textbf  {(a)} Fixed-mixture and alternating stress approaches readily acquire nominal proficiency without catastrophic gameplay degradation. \textbf  {(b)} Direct targeted adversarial exposure effectively limits extreme worst-case trajectory vulnerabilities, explicitly lowering tail severity ($\mathrm  {CVaR}_{0.10}$ and $p95$). \textbf  {(c)} In Stage 2, tracked IBR metrics show that sufficient optimization bandwidth can yield positive \textsf  {defender\_adversarial} shifts and subsequent \textsf  {attacker\_adaptation}; these curves should be read as theorem-motivated diagnostics rather than as exact row-wise certificates.}}{22}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:all_diagnostics}{{1}{22}{Training dynamics and IBR diagnostics averaged over independent seeds. \textbf {(a)} Fixed-mixture and alternating stress approaches readily acquire nominal proficiency without catastrophic gameplay degradation. \textbf {(b)} Direct targeted adversarial exposure effectively limits extreme worst-case trajectory vulnerabilities, explicitly lowering tail severity ($\cvar _{0.10}$ and $p95$). \textbf {(c)} In Stage 2, tracked IBR metrics show that sufficient optimization bandwidth can yield positive \textsf {defender\_adversarial} shifts and subsequent \textsf {attacker\_adaptation}; these curves should be read as theorem-motivated diagnostics rather than as exact row-wise certificates}{figure.caption.7}{}}
 \bibstyle{unsrtnat}
 \bibdata{references}
 \bibcite{iyengar2005robust}{{1}{2005}{{Iyengar}}{{}}}
 \bibcite{nilim2005robust}{{2}{2005}{{Nilim and El~Ghaoui}}{{}}}
 \bibcite{pinto2017robust}{{3}{2017}{{Pinto et~al.}}{{Pinto, Davidson, Sukthankar, and Gupta}}}
 \bibcite{kaelbling1998pomdp}{{4}{1998}{{Kaelbling et~al.}}{{Kaelbling, Littman, and Cassandra}}}
-\bibcite{schulman2017ppo}{{5}{2017}{{Schulman et~al.}}{{Schulman, Wolski, Dhariwal, Radford, and Klimov}}}
-\bibcite{rockafellar2000cvar}{{6}{2000}{{Rockafellar and Uryasev}}{{}}}
-\bibcite{chow2015cvar}{{7}{2015}{{Chow et~al.}}{{Chow, Tamar, Mannor, and Pavone}}}
-\bibcite{brown1951fictitious}{{8}{1951}{{Brown}}{{}}}
-\bibcite{heinrich2016fsp}{{9}{2016}{{Heinrich and Silver}}{{}}}
-\bibcite{vonNeumann1928}{{10}{1928}{{von Neumann}}{{}}}
-\bibcite{Hoeffding1963}{{11}{1963}{{Hoeffding}}{{}}}
-\gdef \@abspage@last{21}
+\bibcite{chen2016pomdplite}{{5}{2016}{{Chen et~al.}}{{Chen, Frazzoli, Hsu, and Lee}}}
+\bibcite{osogami2015robust}{{6}{2015}{{Osogami}}{{}}}
+\bibcite{schulman2017ppo}{{7}{2017}{{Schulman et~al.}}{{Schulman, Wolski, Dhariwal, Radford, and Klimov}}}
+\bibcite{rockafellar2000cvar}{{8}{2000}{{Rockafellar and Uryasev}}{{}}}
+\bibcite{chow2015cvar}{{9}{2015}{{Chow et~al.}}{{Chow, Tamar, Mannor, and Pavone}}}
+\bibcite{brown1951fictitious}{{10}{1951}{{Brown}}{{}}}
+\bibcite{heinrich2016fsp}{{11}{2016}{{Heinrich and Silver}}{{}}}
+\bibcite{vonNeumann1928}{{12}{1928}{{von Neumann}}{{}}}
+\bibcite{Hoeffding1963}{{13}{1963}{{Hoeffding}}{{}}}
+\gdef \@abspage@last{23}
