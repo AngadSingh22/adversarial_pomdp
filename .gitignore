@@ -19,3 +19,4 @@ csrc/*.o
 csrc/*.so
 *.log
 .DS_Store
+formulation/paper/arxiv_template_version/

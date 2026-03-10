@@ -1,0 +1,77 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Iyengar(2005)]{iyengar2005robust}
+Garud~N. Iyengar.
+\newblock Robust dynamic programming for markov decision processes.
+\newblock \emph{Mathematics of Operations Research}, 30\penalty0 (2):\penalty0
+  257--280, 2005.
+\newblock \doi{10.1287/moor.1050.0149}.
+
+\bibitem[Nilim and El~Ghaoui(2005)]{nilim2005robust}
+Arnab Nilim and Laurent El~Ghaoui.
+\newblock Robust control of markov decision processes with uncertain transition
+  matrices.
+\newblock \emph{Operations Research}, 53\penalty0 (5):\penalty0 780--798, 2005.
+\newblock \doi{10.1287/opre.1050.0217}.
+
+\bibitem[Pinto et~al.(2017)Pinto, Davidson, Sukthankar, and
+  Gupta]{pinto2017robust}
+Lerrel Pinto, James Davidson, Rahul Sukthankar, and Abhinav Gupta.
+\newblock Robust adversarial reinforcement learning.
+\newblock In \emph{Proceedings of the 34th International Conference on Machine
+  Learning}, pages 2817--2826, 2017.
+
+\bibitem[Kaelbling et~al.(1998)Kaelbling, Littman, and
+  Cassandra]{kaelbling1998pomdp}
+Leslie~Pack Kaelbling, Michael~L. Littman, and Anthony~R. Cassandra.
+\newblock Planning and acting in partially observable stochastic domains.
+\newblock \emph{Artificial Intelligence}, 101\penalty0 (1--2):\penalty0
+  99--134, 1998.
+\newblock \doi{10.1016/S0004-3702(98)00023-X}.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{schulman2017ppo}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms, 2017.
+
+\bibitem[Rockafellar and Uryasev(2000)]{rockafellar2000cvar}
+R.~Tyrrell Rockafellar and Stanislav Uryasev.
+\newblock Optimization of conditional value-at-risk.
+\newblock \emph{Journal of Risk}, 2\penalty0 (3):\penalty0 21--42, 2000.
+
+\bibitem[Chow et~al.(2015)Chow, Tamar, Mannor, and Pavone]{chow2015cvar}
+Yinlam Chow, Aviv Tamar, Shie Mannor, and Marco Pavone.
+\newblock Risk-sensitive and robust decision-making: A {CVaR} optimization
+  approach.
+\newblock In \emph{Advances in Neural Information Processing Systems}, 2015.
+
+\bibitem[Brown(1951)]{brown1951fictitious}
+George~W. Brown.
+\newblock Iterative solution of games by fictitious play.
+\newblock Technical report, RAND Corporation, 1951.
+
+\bibitem[Heinrich and Silver(2016)]{heinrich2016fsp}
+Johannes Heinrich and David Silver.
+\newblock Deep reinforcement learning from self-play in imperfect-information
+  games, 2016.
+
+\bibitem[von Neumann(1928)]{vonNeumann1928}
+John von Neumann.
+\newblock Zur theorie der gesellschaftsspiele.
+\newblock \emph{Mathematische Annalen}, 100\penalty0 (1):\penalty0 295--320,
+  1928.
+\newblock \doi{10.1007/BF01448847}.
+
+\bibitem[Hoeffding(1963)]{Hoeffding1963}
+Wassily Hoeffding.
+\newblock Probability inequalities for sums of bounded random variables.
+\newblock \emph{Journal of the American Statistical Association}, 58\penalty0
+  (301):\penalty0 13--30, 1963.
+\newblock \doi{10.1080/01621459.1963.10500830}.
+
+\end{thebibliography}
