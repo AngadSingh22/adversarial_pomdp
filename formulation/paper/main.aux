@@ -12,50 +12,62 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
 \citation{brown1951fictitious,heinrich2016fsp}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodology, Theoretical Development, and Diagnostics}{3}{section.3}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Stage-1 attacker training}}{9}{algorithm.1}\protected@file@percent }
-\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Restricted iterative best response}}{9}{algorithm.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{9}{section.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Stage-1 results aggregated across three seeds. Nominal = UNIFORM; stress = SPREAD. Lower is better.}}{10}{table.caption.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Theorem-to-metric bridge. Each diagnostic used in the experiments is tied to a precise mathematical statement rather than introduced only for empirical convenience.}}{9}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:stage1}{{1}{10}{Stage-1 results aggregated across three seeds. Nominal = UNIFORM; stress = SPREAD. Lower is better}{table.caption.1}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Final Stage-2 iterative best-response diagnostics across three independent seeds. The columns UNIFORM, SPREAD, and $D_k$ report post-update means $\mathbb  {E}_{\rho _U}[\tau (\pi _k)]$, $\mathbb  {E}_{\rho _{\mathrm  {stress}}}[\tau (\pi _k)]$, and $\mathbb  {E}_{\rho _k}[\tau (\pi _k)]$. The diagnostic columns are computed from both pre- and post-update evaluations: $\textsf  {defender\_adversarial}_k=\mathbb  {E}_{\rho _k}[\tau (\pi _{k-1})]-\mathbb  {E}_{\rho _U}[\tau (\pi _{k-1})]$, $\textsf  {attacker\_adaptation}_k=\mathbb  {E}_{\rho _k}[\tau (\pi _k)]-\mathbb  {E}_{\rho _k}[\tau (\pi _{k-1})]$, and $\textsf  {uniform\_drift}_k=\mathbb  {E}_{\rho _U}[\tau (\pi _k)]-\mathbb  {E}_{\rho _U}[\tau (\pi _{k-1})]$. Defender budgets are restricted to 50k steps per generation, with 100 scripted episodes per mode and 50 pre-update $D_k$ episodes.}}{10}{table.caption.2}\protected@file@percent }
-\newlabel{tab:ibr}{{2}{10}{Final Stage-2 iterative best-response diagnostics across three independent seeds. The columns UNIFORM, SPREAD, and $D_k$ report post-update means $\E _{\rho _U}[\tauT (\pi _k)]$, $\E _{\rhoStress }[\tauT (\pi _k)]$, and $\E _{\rho _k}[\tauT (\pi _k)]$. The diagnostic columns are computed from both pre- and post-update evaluations: $\textsf {defender\_adversarial}_k=\E _{\rho _k}[\tauT (\pi _{k-1})]-\E _{\rho _U}[\tauT (\pi _{k-1})]$, $\textsf {attacker\_adaptation}_k=\E _{\rho _k}[\tauT (\pi _k)]-\E _{\rho _k}[\tauT (\pi _{k-1})]$, and $\textsf {uniform\_drift}_k=\E _{\rho _U}[\tauT (\pi _k)]-\E _{\rho _U}[\tauT (\pi _{k-1})]$. Defender budgets are restricted to 50k steps per generation, with 100 scripted episodes per mode and 50 pre-update $D_k$ episodes}{table.caption.2}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Defender-budget ablation. Positive defender\_adversarial implies that the learned defender induces a harder distribution than the nominal distribution for the current attacker.}}{11}{table.caption.3}\protected@file@percent }
-\newlabel{tab:budget}{{3}{11}{Defender-budget ablation. Positive defender\_adversarial implies that the learned defender induces a harder distribution than the nominal distribution for the current attacker}{table.caption.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Scripted defender-shift metrics.}}{11}{table.caption.4}\protected@file@percent }
-\newlabel{tab:defshift}{{4}{11}{Scripted defender-shift metrics}{table.caption.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion and Future Work}{11}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Limitations}{12}{section.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{13}{section.7}\protected@file@percent }
+\newlabel{fig:diagram_theorem_bridge}{{1}{9}{Theorem-to-metric bridge. Each diagnostic used in the experiments is tied to a precise mathematical statement rather than introduced only for empirical convenience}{figure.caption.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Stage-1 attacker training}}{11}{algorithm.1}\protected@file@percent }
+\newlabel{alg:stage1}{{1}{11}{Stage-1 attacker training}{algorithm.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Restricted iterative best response}}{12}{algorithm.2}\protected@file@percent }
+\newlabel{alg:ibr}{{2}{12}{Restricted iterative best response}{algorithm.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{12}{section.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Stage-1 results aggregated across three seeds. Nominal = UNIFORM; stress = SPREAD. Lower is better.}}{13}{table.caption.2}\protected@file@percent }
+\newlabel{tab:stage1}{{1}{13}{Stage-1 results aggregated across three seeds. Nominal = UNIFORM; stress = SPREAD. Lower is better}{table.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Nominal-versus-stress tradeoff for Stage 1. Fixed-mixture training moves the attacker toward a more balanced robustness point, while alternating stress exposure yields a stronger stress-specialized solution at the cost of nominal performance.}}{14}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:diagram_pareto}{{2}{14}{Nominal-versus-stress tradeoff for Stage 1. Fixed-mixture training moves the attacker toward a more balanced robustness point, while alternating stress exposure yields a stronger stress-specialized solution at the cost of nominal performance}{figure.caption.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Final Stage-2 iterative best-response diagnostics across three independent seeds. The columns UNIFORM, SPREAD, and $D_k$ report post-update means $\mathbb  {E}_{\rho _U}[\tau (\pi _k)]$, $\mathbb  {E}_{\rho _{\mathrm  {stress}}}[\tau (\pi _k)]$, and $\mathbb  {E}_{\rho _k}[\tau (\pi _k)]$. The diagnostic columns are computed from both pre- and post-update evaluations: $\textsf  {defender\_adversarial}_k=\mathbb  {E}_{\rho _k}[\tau (\pi _{k-1})]-\mathbb  {E}_{\rho _U}[\tau (\pi _{k-1})]$, $\textsf  {attacker\_adaptation}_k=\mathbb  {E}_{\rho _k}[\tau (\pi _k)]-\mathbb  {E}_{\rho _k}[\tau (\pi _{k-1})]$, and $\textsf  {uniform\_drift}_k=\mathbb  {E}_{\rho _U}[\tau (\pi _k)]-\mathbb  {E}_{\rho _U}[\tau (\pi _{k-1})]$. Defender budgets are restricted to 50k steps per generation, with 100 scripted episodes per mode and 50 pre-update $D_k$ episodes.}}{15}{table.caption.4}\protected@file@percent }
+\newlabel{tab:ibr}{{2}{15}{Final Stage-2 iterative best-response diagnostics across three independent seeds. The columns UNIFORM, SPREAD, and $D_k$ report post-update means $\E _{\rho _U}[\tauT (\pi _k)]$, $\E _{\rhoStress }[\tauT (\pi _k)]$, and $\E _{\rho _k}[\tauT (\pi _k)]$. The diagnostic columns are computed from both pre- and post-update evaluations: $\textsf {defender\_adversarial}_k=\E _{\rho _k}[\tauT (\pi _{k-1})]-\E _{\rho _U}[\tauT (\pi _{k-1})]$, $\textsf {attacker\_adaptation}_k=\E _{\rho _k}[\tauT (\pi _k)]-\E _{\rho _k}[\tauT (\pi _{k-1})]$, and $\textsf {uniform\_drift}_k=\E _{\rho _U}[\tauT (\pi _k)]-\E _{\rho _U}[\tauT (\pi _{k-1})]$. Defender budgets are restricted to 50k steps per generation, with 100 scripted episodes per mode and 50 pre-update $D_k$ episodes}{table.caption.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Defender-budget ablation. Positive defender\_adversarial implies that the learned defender induces a harder distribution than the nominal distribution for the current attacker.}}{15}{table.caption.6}\protected@file@percent }
+\newlabel{tab:budget}{{3}{15}{Defender-budget ablation. Positive defender\_adversarial implies that the learned defender induces a harder distribution than the nominal distribution for the current attacker}{table.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces IBR diagnostic phase portrait. The $x$-axis encodes whether the learned defender is more adversarial than the nominal distribution, while the $y$-axis encodes the weighted attacker mixture residual. The lower-right region is certificate-consistent under sufficiently accurate best responses.}}{16}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:diagram_phase_portrait}{{3}{16}{IBR diagnostic phase portrait. The $x$-axis encodes whether the learned defender is more adversarial than the nominal distribution, while the $y$-axis encodes the weighted attacker mixture residual. The lower-right region is certificate-consistent under sufficiently accurate best responses}{figure.caption.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Scripted defender-shift metrics.}}{17}{table.caption.7}\protected@file@percent }
+\newlabel{tab:defshift}{{4}{17}{Scripted defender-shift metrics}{table.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Board-level view of defender structure and attacker behavior. Left: marginal occupancy heatmaps for scripted defender families. Right: first-five-shot frequencies from a scripted posterior-search attacker under the corresponding defender family. The figure illustrates both first-order structure and attacker adaptation, while the paper's defender metrics capture higher-order geometric effects that per-cell marginals alone do not determine.}}{17}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:diagram_heatmaps}{{4}{17}{Board-level view of defender structure and attacker behavior. Left: marginal occupancy heatmaps for scripted defender families. Right: first-five-shot frequencies from a scripted posterior-search attacker under the corresponding defender family. The figure illustrates both first-order structure and attacker adaptation, while the paper's defender metrics capture higher-order geometric effects that per-cell marginals alone do not determine}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion and Future Work}{18}{section.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Conceptual transfer path from Battleship to sequential graphics tasks with fixed hidden process latents, such as halftoning or constrained rendering under unknown physical conditions.}}{19}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:diagram_transfer}{{5}{19}{Conceptual transfer path from Battleship to sequential graphics tasks with fixed hidden process latents, such as halftoning or constrained rendering under unknown physical conditions}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Limitations}{19}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{20}{section.7}\protected@file@percent }
 \gdef \LT@i {\LT@entry 
     {1}{115.34666pt}\LT@entry 
     {1}{340.82707pt}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Appendixes}{14}{section.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {A}Notation Table}{14}{appendix.A}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Notation used in the paper.}}{14}{table.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8}Appendixes}{21}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Notation Table}{21}{appendix.A}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Notation used in the paper.}}{21}{table.5}\protected@file@percent }
 \citation{vonNeumann1928}
-\@writefile{toc}{\contentsline {section}{\numberline {B}Proofs}{15}{appendix.B}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Proof of the latent minimax principle}{15}{subsection.B.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Proof of the extreme-point corollary}{15}{subsection.B.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Proof of the approximate best-response certificates}{16}{subsection.B.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Proofs}{22}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.1}Proof of the latent minimax principle}{22}{subsection.B.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.2}Proof of the extreme-point corollary}{22}{subsection.B.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.3}Proof of the approximate best-response certificates}{23}{subsection.B.3}\protected@file@percent }
 \citation{Hoeffding1963}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Proof of finite-sample sign certification}{17}{subsection.B.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}Proof of marginal insufficiency for fixed policies}{18}{subsection.B.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {B.6}Proof of the supported weakly Pareto-optimality corollary}{19}{subsection.B.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {C}Hyperparameters and Training Metadata}{20}{appendix.C}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Proximal Policy Optimization (PPO) hyperparameters.}}{20}{table.caption.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Additional Baselines}{21}{appendix.D}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Baseline absolute performance (mean shots-to-win $\pm $ standard deviation) against UNIFORM and SPREAD.}}{21}{table.caption.6}\protected@file@percent }
-\newlabel{tab:additional_baselines}{{7}{21}{Baseline absolute performance (mean shots-to-win $\pm $ standard deviation) against UNIFORM and SPREAD}{table.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {E}Training Dynamics and IBR Diagnostics}{22}{appendix.E}\protected@file@percent }
-\newlabel{fig:learning_curves}{{1a}{22}{Stage-1: Attacker learning curves}{figure.caption.7}{}}
-\newlabel{sub@fig:learning_curves}{{a}{22}{Stage-1: Attacker learning curves}{figure.caption.7}{}}
-\newlabel{fig:tail_curves}{{1b}{22}{Stage-1: Tail optimization curves}{figure.caption.7}{}}
-\newlabel{sub@fig:tail_curves}{{b}{22}{Stage-1: Tail optimization curves}{figure.caption.7}{}}
-\newlabel{fig:ibr_generation}{{1c}{22}{Stage-2: Final IBR generation diagnostics}{figure.caption.7}{}}
-\newlabel{sub@fig:ibr_generation}{{c}{22}{Stage-2: Final IBR generation diagnostics}{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Training dynamics and IBR diagnostics averaged over independent seeds. \textbf  {(a)} Fixed-mixture and alternating stress approaches readily acquire nominal proficiency without catastrophic gameplay degradation. \textbf  {(b)} Direct targeted adversarial exposure effectively limits extreme worst-case trajectory vulnerabilities, explicitly lowering tail severity ($\mathrm  {CVaR}_{0.10}$ and $p95$). \textbf  {(c)} In Stage 2, tracked IBR metrics show that sufficient optimization bandwidth can yield positive \textsf  {defender\_adversarial} shifts and subsequent \textsf  {attacker\_adaptation}; these curves should be read as theorem-motivated diagnostics rather than as exact row-wise certificates.}}{22}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:all_diagnostics}{{1}{22}{Training dynamics and IBR diagnostics averaged over independent seeds. \textbf {(a)} Fixed-mixture and alternating stress approaches readily acquire nominal proficiency without catastrophic gameplay degradation. \textbf {(b)} Direct targeted adversarial exposure effectively limits extreme worst-case trajectory vulnerabilities, explicitly lowering tail severity ($\cvar _{0.10}$ and $p95$). \textbf {(c)} In Stage 2, tracked IBR metrics show that sufficient optimization bandwidth can yield positive \textsf {defender\_adversarial} shifts and subsequent \textsf {attacker\_adaptation}; these curves should be read as theorem-motivated diagnostics rather than as exact row-wise certificates}{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.4}Proof of finite-sample sign certification}{24}{subsection.B.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.5}Proof of marginal insufficiency for fixed policies}{26}{subsection.B.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {B.6}Proof of the supported weakly Pareto-optimality corollary}{27}{subsection.B.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Hyperparameters and Training Metadata}{27}{appendix.C}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Proximal Policy Optimization (PPO) hyperparameters.}}{27}{table.caption.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}Additional Baselines}{28}{appendix.D}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Baseline absolute performance (mean shots-to-win $\pm $ standard deviation) against UNIFORM and SPREAD.}}{28}{table.caption.11}\protected@file@percent }
+\newlabel{tab:additional_baselines}{{7}{28}{Baseline absolute performance (mean shots-to-win $\pm $ standard deviation) against UNIFORM and SPREAD}{table.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {E}Training Dynamics and IBR Diagnostics}{29}{appendix.E}\protected@file@percent }
+\newlabel{fig:learning_curves}{{6a}{29}{Stage-1: Attacker learning curves}{figure.caption.12}{}}
+\newlabel{sub@fig:learning_curves}{{a}{29}{Stage-1: Attacker learning curves}{figure.caption.12}{}}
+\newlabel{fig:tail_curves}{{6b}{29}{Stage-1: Tail optimization curves}{figure.caption.12}{}}
+\newlabel{sub@fig:tail_curves}{{b}{29}{Stage-1: Tail optimization curves}{figure.caption.12}{}}
+\newlabel{fig:ibr_generation}{{6c}{29}{Stage-2: Final IBR generation diagnostics}{figure.caption.12}{}}
+\newlabel{sub@fig:ibr_generation}{{c}{29}{Stage-2: Final IBR generation diagnostics}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Training dynamics and IBR diagnostics averaged over independent seeds. \textbf  {(a)} Fixed-mixture and alternating stress approaches readily acquire nominal proficiency without catastrophic gameplay degradation. \textbf  {(b)} Direct targeted adversarial exposure effectively limits extreme worst-case trajectory vulnerabilities, explicitly lowering tail severity ($\mathrm  {CVaR}_{0.10}$ and $p95$). \textbf  {(c)} In Stage 2, tracked IBR metrics show that sufficient optimization bandwidth can yield positive \textsf  {defender\_adversarial} shifts and subsequent \textsf  {attacker\_adaptation}; these curves should be read as theorem-motivated diagnostics rather than as exact row-wise certificates.}}{29}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:all_diagnostics}{{6}{29}{Training dynamics and IBR diagnostics averaged over independent seeds. \textbf {(a)} Fixed-mixture and alternating stress approaches readily acquire nominal proficiency without catastrophic gameplay degradation. \textbf {(b)} Direct targeted adversarial exposure effectively limits extreme worst-case trajectory vulnerabilities, explicitly lowering tail severity ($\cvar _{0.10}$ and $p95$). \textbf {(c)} In Stage 2, tracked IBR metrics show that sufficient optimization bandwidth can yield positive \textsf {defender\_adversarial} shifts and subsequent \textsf {attacker\_adaptation}; these curves should be read as theorem-motivated diagnostics rather than as exact row-wise certificates}{figure.caption.12}{}}
 \bibstyle{unsrtnat}
 \bibdata{references}
 \bibcite{iyengar2005robust}{{1}{2005}{{Iyengar}}{{}}}
@@ -71,4 +83,4 @@
 \bibcite{heinrich2016fsp}{{11}{2016}{{Heinrich and Silver}}{{}}}
 \bibcite{vonNeumann1928}{{12}{1928}{{von Neumann}}{{}}}
 \bibcite{Hoeffding1963}{{13}{1963}{{Hoeffding}}{{}}}
-\gdef \@abspage@last{23}
+\gdef \@abspage@last{30}

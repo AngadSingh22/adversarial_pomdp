@@ -8,6 +8,7 @@
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{xcolor}
+\usepackage{tikz}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage[colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue]{hyperref}
 \usepackage{algorithm}
@@ -19,6 +20,8 @@
 \usepackage{subcaption}
 \usepackage{longtable}
 \usepackage{parskip}
+\usepackage[section]{placeins}
+\usetikzlibrary{arrows.meta,backgrounds,calc,fit,positioning,shapes.geometric}
 \title{Adversarial Latent-State Training for Robust Policies in Partially Observable Domains}
 \author{
   Angad Singh Ahuja \\
@@ -53,6 +56,112 @@
 \newcommand{\cvar}{\mathrm{CVaR}}
 \newcommand{\gammaTrain}{\gamma_{\mathrm{train}}}
 \newcommand{\TODO}[1]{\textbf{TODO: #1}}
+
+\definecolor{diagInk}{HTML}{25313D}
+\definecolor{diagSlate}{HTML}{667481}
+\definecolor{diagFog}{HTML}{EEF1F4}
+\definecolor{diagMist}{HTML}{D8E0E8}
+\definecolor{diagBlue}{HTML}{416B8A}
+\definecolor{diagBlueLight}{HTML}{A8BED0}
+\definecolor{diagRust}{HTML}{B8644A}
+\definecolor{diagRustLight}{HTML}{E2B7A8}
+\definecolor{diagOchre}{HTML}{C28B3B}
+\definecolor{diagSand}{HTML}{E8D9C7}
+\definecolor{diagLine}{HTML}{CBD4DC}
+
+\tikzset{
+  diagram text/.style={font=\sffamily\small, text=diagInk},
+  diagram note/.style={
+    draw=diagLine,
+    fill=diagFog,
+    rounded corners=9pt,
+    align=left,
+    inner sep=8pt,
+    text width=3.0cm
+  },
+  diagram callout/.style={
+    draw=diagLine,
+    fill=white,
+    rounded corners=10pt,
+    align=left,
+    inner sep=8pt,
+    text width=3.15cm,
+    minimum height=1.8cm
+  },
+  diagram defender box/.style={diagram callout, draw=diagBlue, fill=diagBlue!12},
+  diagram latent box/.style={diagram callout, draw=diagBlue, fill=diagBlueLight!26},
+  diagram attacker box/.style={diagram callout, draw=diagRust, fill=diagRust!13},
+  diagram outcome box/.style={diagram callout, draw=diagLine, fill=diagSand!35},
+  diagram observation box/.style={
+    draw=diagLine,
+    fill=diagFog,
+    rounded corners=10pt,
+    align=left,
+    inner sep=8pt,
+    text width=6.2cm,
+    minimum height=1.35cm
+  },
+  diagram header/.style={
+    draw=diagLine,
+    fill=diagFog,
+    rounded corners=8pt,
+    align=center,
+    inner sep=6pt,
+    minimum height=0.85cm,
+    text width=3.35cm
+  },
+  diagram table theory/.style={diagram header, draw=diagBlue, fill=diagBlue!12},
+  diagram table math/.style={diagram header, draw=diagLine, fill=diagFog},
+  diagram table empirical/.style={diagram header, draw=diagRust, fill=diagSand},
+  diagram cell theory/.style={
+    draw=diagBlue,
+    fill=diagBlue!6,
+    rounded corners=8pt,
+    align=left,
+    inner sep=7pt,
+    text width=3.35cm,
+    minimum height=1.22cm
+  },
+  diagram cell math/.style={
+    draw=diagLine,
+    fill=diagFog!85,
+    rounded corners=8pt,
+    align=left,
+    inner sep=7pt,
+    text width=4.35cm,
+    minimum height=1.22cm
+  },
+  diagram cell empirical/.style={
+    draw=diagRust,
+    fill=diagSand!70,
+    rounded corners=8pt,
+    align=left,
+    inner sep=7pt,
+    text width=4.15cm,
+    minimum height=1.22cm
+  },
+  diagram side box/.style={
+    draw=diagLine,
+    fill=white,
+    rounded corners=12pt,
+    align=left,
+    inner sep=10pt,
+    text width=3.5cm,
+    minimum height=4.4cm
+  },
+  diagram center box/.style={
+    draw=diagBlue,
+    fill=diagFog,
+    rounded corners=14pt,
+    align=center,
+    inner sep=12pt,
+    text width=4.6cm,
+    minimum height=4.7cm
+  },
+  diagram arrow/.style={-{Latex[length=3.2mm,width=2.0mm]}, line width=0.95pt, draw=diagInk},
+  diagram hidden arrow/.style={diagram arrow, draw=diagSlate, dashed},
+  diagram brace/.style={line width=0.9pt, draw=diagLine}
+}
 
 \begin{document}
 \maketitle
@@ -382,6 +491,47 @@ This proposition is intentionally modest. It does not claim that identical one-c
 
 The empirical diagnostics are therefore not ad hoc. The quantity \textsf{defender\_adversarial} operationalizes the defender certificate theorem, while the weighted residual $R_k$ operationalizes the attacker certificate theorem. In the actual experiments, these objects are best understood as theorem-motivated diagnostics for empirically estimated quantities rather than as formal certificates of small optimization error.
 
+Figure~\ref{fig:diagram_theorem_bridge} summarizes this theorem-to-metric map. Its purpose in the paper is not decorative: it makes explicit which empirical quantity is supposed to instantiate which mathematical statement later in the results section.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[diagram text, font=\sffamily\small]
+    \node[diagram table theory, text width=3.10cm] (h1) at (-4.70,0.00) {\textbf{Theory}};
+    \node[diagram table math, text width=4.10cm] (h2) at (0.00,0.00) {\textbf{Mathematical object}};
+    \node[diagram table empirical, text width=4.10cm] (h3) at (4.90,0.00) {\textbf{Empirical manifestation}};
+
+    \node[diagram cell theory, text width=3.10cm] (t1) at (-4.70,-1.55) {\textbf{Latent minimax}\\\textbf{principle}};
+    \node[diagram cell math, text width=4.10cm] (m1) at (0.00,-1.55) {$V(\mu,\rho)$ with $\rho\in\mathcal{P}$\\and extreme-point\\defenders};
+    \node[diagram cell empirical, text width=4.10cm] (e1) at (4.90,-1.55) {Stage 1 regime comparison\\and scripted defender\\families};
+
+    \node[diagram cell theory, text width=3.10cm] (t2) at (-4.70,-3.15) {\textbf{Approximate defender}\\\textbf{certificate}};
+    \node[diagram cell math, text width=4.10cm] (m2) at (0.00,-3.15) {$\textsf{defender\_adversarial}_k \ge -\epsilon_D$};
+    \node[diagram cell empirical, text width=4.10cm] (e2) at (4.90,-3.15) {Stage 2 diagnostics table\\and defender-budget\\ablation};
+
+    \node[diagram cell theory, text width=3.10cm] (t3) at (-4.70,-4.75) {\textbf{Approximate attacker}\\\textbf{certificate}};
+    \node[diagram cell math, text width=4.10cm] (m3) at (0.00,-4.75) {$\lambda\,\textsf{attacker\_adaptation}_k$\\$+(1-\lambda)\,\textsf{uniform\_drift}_k \le \epsilon_A$};
+    \node[diagram cell empirical, text width=4.10cm] (e3) at (4.90,-4.75) {Stage 2 adaptation-versus-\\drift interpretation};
+
+    \node[diagram cell theory, text width=3.10cm] (t4) at (-4.70,-6.35) {\textbf{Finite-sample sign}\\\textbf{certification}};
+    \node[diagram cell math, text width=4.10cm] (m4) at (0.00,-6.35) {Confidence radius for the\\sign of each diagnostic};
+    \node[diagram cell empirical, text width=4.10cm] (e4) at (4.90,-6.35) {Error bars, confidence\\bands, and sign-aware\\sanity checks};
+
+    \node[diagram cell theory, text width=3.10cm] (t5) at (-4.70,-7.95) {\textbf{Marginal insufficiency}\\\textbf{for fixed policies}};
+    \node[diagram cell math, text width=4.10cm] (m5) at (0.00,-7.95) {Low-order marginals do\\not determine hardness};
+    \node[diagram cell empirical, text width=4.10cm] (e5) at (4.90,-7.95) {Structure-aware defender\\metrics and geometry\\plots};
+
+    \foreach \lhs/\mid/\rhs in {t1/m1/e1,t2/m2/e2,t3/m3/e3,t4/m4/e4,t5/m5/e5} {
+        \draw[diagram arrow] (\lhs.east) -- (\mid.west);
+        \draw[diagram arrow] (\mid.east) -- (\rhs.west);
+    }
+
+    \node[diagram note, text width=13.10cm] (footer) at (0.10,-9.75) {\textbf{Diagnostics are theory-facing empirical quantities, not post hoc monitoring statistics.}};
+\end{tikzpicture}
+\caption{Theorem-to-metric bridge. Each diagnostic used in the experiments is tied to a precise mathematical statement rather than introduced only for empirical convenience.}
+\label{fig:diagram_theorem_bridge}
+\end{figure}
+\FloatBarrier
+
 There is also a useful multiobjective reading of the attacker-training regimes. If one regards nominal loss and adversarial loss as two objectives, then training against a mixture
 \[
 \lambda \rho_D + (1-\lambda)\rho_U
@@ -398,39 +548,147 @@ for some $\lambda\in(0,1)$ attains a supported weakly Pareto-optimal point of th
 
 The solution-space choices are now easy to state. The reported experiments use the sparse step-penalty reward together with discounted PPO as a surrogate for the evaluation objective $\E[\tauT]$. A shaped reward family is conceptually possible and is discussed in the solution-space specification, but it is not the focus of the reported results. The attacker policy actually implemented for the main experiments is a feedforward masked PPO policy over the public three-channel board tensor rather than a recurrent explicit-belief controller. This is a methodological choice rather than a property of the problem itself. The baseline self-play protocol is alternating optimization: hold the defender fixed while training the attacker, then hold the attacker fixed while training the defender. More elaborate game-theoretic stabilizers are possible, but they are not needed to define the present benchmark.
 
-For clarity, the two main training procedures are summarized below.
+For the algorithmic summaries, it is useful to write the training loops in operator form. In Stage 1, let $r\in\{A,B,C\}$ denote the chosen training regime, let
+\[
+\rho^{(A)}_g=\rho_U,
+\qquad
+\rho^{(B)}_g=\rho_{\mathrm{mix}},
+\qquad
+\rho^{(C)}_g=\rho_{b(g)},
+\]
+where $\rho_{\mathrm{mix}}$ is the fixed scripted training mixture and $b(g)$ is the alternating block schedule with $\rho_{b(g)}\in\{\rho_U,\rhoStress\}$. If $\mathcal{D}_g$ denotes the masked rollout batch collected at attacker iterate $\pi_g$, we may summarize the update as
+\[
+\mathcal{D}_g \sim \mathsf{Rollout}(\pi_g,\rho^{(r)}_g,N_g),
+\qquad
+\pi_{g+1}=\mathsf{PPO}_{A}(\pi_g,\mathcal{D}_g).
+\]
+In Stage 2, the defender and attacker updates may be written as
+\[
+\pi_{D,k}=\mathsf{Train}_{D}(\pi_{A,k-1};\tau_D),
+\qquad
+\rho_k=\mathsf{Extract}(\pi_{D,k}),
+\qquad
+\nu_k=\lambda \rho_k+(1-\lambda)\rho_U,
+\]
+followed by
+\[
+\pi_{A,k}=\mathsf{Train}_{A}(\pi_{A,k-1},\nu_k;\tau_A).
+\]
+The logged quantities are empirical estimates of the theorem-level diagnostics, so we distinguish them with hats:
+\[
+\widehat{\textsf{defender\_adversarial}}_k
+:=
+\widehat{\E}_{\rho_k}[\tauT(\pi_{A,k-1})]
+-
+\widehat{\E}_{\rho_U}[\tauT(\pi_{A,k-1})],
+\]
+\[
+\widehat{\textsf{attacker\_adaptation}}_k
+:=
+\widehat{\E}_{\rho_k}[\tauT(\pi_{A,k})]
+-
+\widehat{\E}_{\rho_k}[\tauT(\pi_{A,k-1})],
+\]
+and
+\[
+\widehat{\textsf{uniform\_drift}}_k
+:=
+\widehat{\E}_{\rho_U}[\tauT(\pi_{A,k})]
+-
+\widehat{\E}_{\rho_U}[\tauT(\pi_{A,k-1})].
+\]
 
-\begin{algorithm}[t]
+For clarity, the two main training procedures are summarized below. Algorithm~\ref{alg:stage1} isolates the single-attacker training loop used for the Stage-1 regime comparison, while Algorithm~\ref{alg:ibr} adds the restricted defender step and the inter-generation diagnostics that drive the Stage-2 analysis.
+
+\begin{algorithm}[H]
 \caption{Stage-1 attacker training}
+\label{alg:stage1}
 \begin{algorithmic}[1]
-\STATE Initialize attacker policy $\pi$
-\FOR{each training iteration}
-    \STATE Sample defender mode according to the chosen regime:
-    \begin{itemize}
-        \item A: always UNIFORM
-        \item B: fixed scripted mixture
-        \item C: alternating nominal and stress-heavy blocks
-    \end{itemize}
-    \STATE Collect masked rollouts
-    \STATE Update $\pi$ with PPO
-    \STATE Periodically evaluate on UNIFORM and SPREAD
+\STATE Input regime $r\in\{A,B,C\}$, initialization $\pi_0$, rollout sizes $\{N_g\}_{g=0}^{G_1-1}$, and evaluation schedule $\mathcal{I}_{\mathrm{eval}}$
+\FOR{$g=0,\dots,G_1-1$}
+    \STATE Set the training latent distribution $\rho^{(r)}_g$:
+    \[
+    \rho^{(A)}_g=\rho_U,\qquad
+    \rho^{(B)}_g=\rho_{\mathrm{mix}},\qquad
+    \rho^{(C)}_g=\rho_{b(g)}.
+    \]
+    \STATE Sample masked rollouts
+    \[
+    \mathcal{D}_g \sim \mathsf{Rollout}(\pi_g,\rho^{(r)}_g,N_g).
+    \]
+    \STATE Update the attacker with PPO:
+    \[
+    \pi_{g+1}\leftarrow \mathsf{PPO}_{A}(\pi_g,\mathcal{D}_g).
+    \]
+    \IF{$g+1\in\mathcal{I}_{\mathrm{eval}}$}
+        \STATE Estimate the evaluation losses
+        \[
+        \widehat{J}_U(\pi_{g+1})=\widehat{\E}_{\rho_U}[\tauT(\pi_{g+1})],
+        \qquad
+        \widehat{J}_S(\pi_{g+1})=\widehat{\E}_{\rhoStress}[\tauT(\pi_{g+1})].
+        \]
+    \ENDIF
 \ENDFOR
+\STATE Return $\pi_{G_1}$
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}[t]
+Algorithm~\ref{alg:stage1} should be read as the controlled baseline procedure for the paper. It answers the first empirical question by varying only the attacker's training exposure to latent shift while keeping the defender fixed to scripted distributions. In that sense, Stage 1 establishes the comparative robustness phenomenon before any learned adversary is introduced: if mixture or alternating exposure already narrows the nominal-to-stress gap, then the hidden-latent training signal is doing useful work even without self-play. Algorithm~\ref{alg:ibr} then builds directly on this scaffold by replacing the fixed stress source with a learned restricted defender, carrying forward the same attacker update machinery but embedding it inside an inter-generation game. The conceptual move from Algorithm~\ref{alg:stage1} to Algorithm~\ref{alg:ibr} is therefore narrow but important: Stage 1 studies robustness under prescribed latent shift, whereas Stage 2 studies whether the defender can \emph{discover} and repeatedly refresh harder latent distributions that remain meaningful for the current attacker.
+
+\begin{algorithm}[H]
 \caption{Restricted iterative best response}
+\label{alg:ibr}
 \begin{algorithmic}[1]
-\STATE Initialize attacker $\pi_{A,0}$ from a Stage-1 regime
+\STATE Input initial attacker $\pi_{A,0}$, generations $G$, budgets $(\tau_D,\tau_A)$, and mixture weight $\lambda$
 \FOR{$k=1,\dots,G$}
-    \STATE Train defender $\pi_{D,k}$ against frozen attacker $\pi_{A,k-1}$
-    \STATE Extract a defender-induced latent distribution $\rho_k$
-    \STATE Train attacker $\pi_{A,k}$ against mixture $\lambda \rho_k + (1-\lambda)\rho_U$
-    \STATE Evaluate $\pi_{A,k-1}$ and $\pi_{A,k}$ on $\rho_U$, $\rho_{\mathrm{stress}}$, and $\rho_k$
-    \STATE Log \textsf{defender\_adversarial}$_k$, \textsf{attacker\_adaptation}$_k$, and \textsf{uniform\_drift}$_k$
+    \STATE Train a defender against the frozen attacker:
+    \[
+    \pi_{D,k}\leftarrow \mathsf{Train}_{D}(\pi_{A,k-1};\tau_D).
+    \]
+    \STATE Extract the induced latent distribution:
+    \[
+    \rho_k\leftarrow \mathsf{Extract}(\pi_{D,k}).
+    \]
+    \STATE Form the attacker-training mixture
+    \[
+    \nu_k\leftarrow \lambda \rho_k + (1-\lambda)\rho_U.
+    \]
+    \STATE Update the attacker:
+    \[
+    \pi_{A,k}\leftarrow \mathsf{Train}_{A}(\pi_{A,k-1},\nu_k;\tau_A).
+    \]
+    \STATE Estimate
+    \[
+    \widehat{J}_{U,k}^{-}=\widehat{\E}_{\rho_U}[\tauT(\pi_{A,k-1})],\quad
+    \widehat{J}_{D,k}^{-}=\widehat{\E}_{\rho_k}[\tauT(\pi_{A,k-1})],\quad
+    \widehat{J}_{U,k}^{+}=\widehat{\E}_{\rho_U}[\tauT(\pi_{A,k})],
+    \]
+    \[
+    \widehat{J}_{D,k}^{+}=\widehat{\E}_{\rho_k}[\tauT(\pi_{A,k})],
+    \qquad
+    \widehat{J}_{S,k}^{+}=\widehat{\E}_{\rhoStress}[\tauT(\pi_{A,k})].
+    \]
+    \STATE Log
+    \[
+    \widehat{\textsf{defender\_adversarial}}_k
+    \leftarrow
+    \widehat{J}_{D,k}^{-}-\widehat{J}_{U,k}^{-},
+    \]
+    \[
+    \widehat{\textsf{attacker\_adaptation}}_k
+    \leftarrow
+    \widehat{J}_{D,k}^{+}-\widehat{J}_{D,k}^{-},
+    \qquad
+    \widehat{\textsf{uniform\_drift}}_k
+    \leftarrow
+    \widehat{J}_{U,k}^{+}-\widehat{J}_{U,k}^{-}.
+    \]
 \ENDFOR
+\STATE Return $\{(\pi_{A,k},\rho_k)\}_{k=1}^{G}$
 \end{algorithmic}
 \end{algorithm}
+
+With the formal game, the diagnostic objects, and the operational training loops now fixed, we can turn to the empirical questions and ask what these procedures achieve under the reported budgets.
 
 For the reported Stage-2 runs, the attacker mixture weight is fixed at $\lambda=0.5$. Generation-wise evaluation uses $100$ episodes for each scripted defender mode, $50$ episodes for the pre-update $D_k$ evaluation, and $100$ episodes for the post-update $D_k$ evaluation.
 
@@ -457,7 +715,17 @@ C (alternating stress) & 93.33 $\pm$ 2.04 & 84.44 $\pm$ 1.62 & -8.89 $\pm$ 2.42 
 }
 \end{table}
 
+The nominal-versus-stress tradeoff visible in Table~\ref{tab:stage1} is easier to read geometrically in Figure~\ref{fig:diagram_pareto}. Regime B occupies the most balanced point in this experiment, whereas Regime C moves farther toward stress-specialized behavior.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.88\linewidth]{figures/appendix_pareto_frontier.pdf}
+\caption{Nominal-versus-stress tradeoff for Stage 1. Fixed-mixture training moves the attacker toward a more balanced robustness point, while alternating stress exposure yields a stronger stress-specialized solution at the cost of nominal performance.}
+\label{fig:diagram_pareto}
+\end{figure}
+
 These Stage-1 gains should be interpreted as \emph{relative robustness gains} rather than as evidence of strong absolute gameplay. The strongest scripted baselines in this benchmark remain substantially better than the learned attackers at the current budgets. That point matters and should be made plainly. The present paper is about robustness under hidden latent shift, not about solving Battleship optimally.
+\FloatBarrier
 
 The Stage-2 results are more nuanced and, in some ways, more informative. Table~\ref{tab:ibr} gives the final three-seed iterative best-response diagnostics now contained in the uploaded paper. The quantity \textsf{defender\_adversarial} is the key empirical bridge to the theory. Under an exact defender best response it cannot be negative, and under an $\varepsilon_D$-best response it is bounded below by $-\varepsilon_D$. Because $\varepsilon_D$ is not directly observed, negative entries should be read as evidence of limited defender optimization rather than as formal violations of the minimax formulation. The displayed UNIFORM, SPREAD, and $D_k$ columns report post-update means for $A_k$, whereas the diagnostic columns use the pre/post definitions stated in the table caption.
 
@@ -491,6 +759,15 @@ Seed & Generation ($k$) & $A_k$ on UNIFORM & $A_k$ on SPREAD & $A_k$ on $D_k$ & 
 
 The Stage-2 table also clarifies the third experimental question. The attacker does adapt in some generations, but that adaptation is not uniformly clean. Theorem 2 says that the correct object is the \emph{weighted combination} of attacker adaptation and nominal drift, which in the reported runs uses $\lambda=0.5$. In other words, a small amount of nominal degradation can still be acceptable if it is compensated by sufficient improvement against the learned defender. At the sample sizes used here, the finite-sample theorem is intentionally conservative, so we treat it as a worst-case sanity check rather than as a sharp row-wise sign certificate. The empirical picture is therefore not one of failure, but of partial success under a budget-limited adversarial regime.
 
+Figure~\ref{fig:diagram_phase_portrait} packages the same certificate logic in two dimensions. Generations that move toward the lower-right region are the ones most consistent with the approximate best-response picture, while upper-half points indicate clear residual optimization error on the attacker side.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.90\linewidth]{figures/appendix_ibr_phase_portrait.pdf}
+\caption{IBR diagnostic phase portrait. The $x$-axis encodes whether the learned defender is more adversarial than the nominal distribution, while the $y$-axis encodes the weighted attacker mixture residual. The lower-right region is certificate-consistent under sufficiently accurate best responses.}
+\label{fig:diagram_phase_portrait}
+\end{figure}
+
 That budget-limited interpretation becomes much clearer in the defender-budget ablation. Table~\ref{tab:budget} varies defender optimization budget while keeping the attacker side fixed. At $50$k defender steps, the defender frequently fails to remain reliably adversarial, especially for seed 42. At $200$k steps, the first generation for seed 42 becomes positively adversarial. This is exactly the sort of evidence one would hope for if the negative \textsf{defender\_adversarial} values were primarily due to insufficient defender optimization rather than to a conceptual flaw in the game formulation.
 
 \begin{table}[t]
@@ -513,6 +790,7 @@ Budget $(\tau_D)$ & Seed & Gen $(k)$ & defender\_adversarial & attacker\_adaptat
 \end{table}
 
 The defender-shift metrics support the interpretation that the scripted defender families correspond to real structural shifts rather than only relabeled samplers. Table~\ref{tab:defshift} reports centroid distance, cluster score, marginal entropy, and quadrant mass asymmetry. SPREAD is the strongest geometric shift in this family, which is consistent with its role as the main stress distribution in the Stage-1 results.
+\FloatBarrier
 
 \begin{table}[t]
 \centering
@@ -531,6 +809,16 @@ PARITY  & 1.502 & 18.50 & 0.434 & 0.034 \\
 \end{tabular}
 \end{table}
 
+Figure~\ref{fig:diagram_heatmaps} complements those summary metrics with a board-level view. The heatmaps show that the scripted defenders differ not just in aggregate shift scores but also in their spatial occupancy patterns and in the early-shot behavior they induce from a strong posterior-search attacker.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\linewidth,height=0.68\textheight,keepaspectratio]{figures/appendix_board_heatmaps.pdf}
+\caption{Board-level view of defender structure and attacker behavior. Left: marginal occupancy heatmaps for scripted defender families. Right: first-five-shot frequencies from a scripted posterior-search attacker under the corresponding defender family. The figure illustrates both first-order structure and attacker adaptation, while the paper's defender metrics capture higher-order geometric effects that per-cell marginals alone do not determine.}
+\label{fig:diagram_heatmaps}
+\end{figure}
+\FloatBarrier
+
 The results therefore support a differentiated conclusion. Stage 1 provides a strong and stable robustness result: exposure to shifted latent distributions substantially reduces robustness gaps. Stage 2 provides a more conditional result: iterative best response is meaningful, but only when the defender is optimized strongly enough to act as a true adversary. This is not a weakness of the theory. On the contrary, it is precisely where the theory earns its place: the diagnostic quantities are interpretable because they are tied to explicit certificate theorems.
 
 \section{Discussion and Future Work}
@@ -540,6 +828,29 @@ The theoretical and empirical halves of the paper point to the same conclusion, 
 The experiments, in turn, support two claims of different strengths. The first claim is comparatively strong: training exposure to latent shift reduces robustness gaps under latent shift. This is supported clearly by Stage 1 and is stable across three seeds. The second claim is more cautious: full iterative best response can discover harder latent distributions and yield meaningful attacker adaptation, but only when the defender side is trained strongly enough. This is why the defender-budget ablation matters so much. It turns what could otherwise be dismissed as unstable self-play into a concrete scientific result about when the adversarial training game is or is not being solved well enough to justify its interpretation.
 
 A further reason to take this formulation seriously is that it is not intrinsically tied to Battleship. The hidden-layout interpretation is especially clear there, but the same mathematics may apply whenever a sequential controller acts under a fixed hidden process condition. This is where the graphics-for-ML motivation becomes relevant. In sequential halftoning, print planning, or physically constrained image-generation loops, one can imagine hidden process latents such as substrate behavior, optical blur, dot gain, viewing condition, or calibration drift being selected at the beginning of a trajectory and then remaining fixed. If those settings are cast as sequential decision problems, the present theorem package offers a natural robustness language: the adversary chooses the hidden process condition, the controller acts sequentially, and the resulting diagnostics have a principled interpretation. We therefore see one natural direction for future work as the transfer of this adversarial latent-state framework to sequential graphics problems, especially DRL-based halftoning under hidden process shift.
+
+Figure~\ref{fig:diagram_transfer} summarizes that transfer path. Battleship is not itself the target graphics application; it is the clean finite benchmark that makes the hidden-latent-at-time-zero structure explicit enough to analyze and then port to harder sequential control settings.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[diagram text, font=\sffamily\small]
+    \node[diagram side box, draw=diagBlue, fill=diagBlue!6, text width=3.45cm, minimum height=4.60cm] (battle) at (-5.10,0.00) {hidden layout $B$\\[0.35em]partial observations $o_t$\\[0.35em]sequential firing\\actions\\[0.35em]episode loss $\tau$};
+    \node[diagram center box, text width=4.75cm, minimum height=4.90cm] (shared) at (0.00,0.00) {\textbf{Shared hidden-latent template}\\[0.55em]defender chooses a hidden\\latent at time $0$\\[0.35em]controller acts sequentially\\under partial observability\\[0.35em]training and diagnostics\\inherit the same minimax shell};
+    \node[diagram side box, draw=diagRust, fill=diagSand, text width=3.45cm, minimum height=4.60cm] (graphics) at (5.10,0.00) {hidden process latent\\[0.35em]partial feedback\\from rendering\\[0.35em]sequential halftoning\\or control actions\\[0.35em]perceptual or physical\\loss};
+
+    \node[diagram table theory, text width=3.15cm, minimum height=0.78cm] at ($(battle.north)+(0,0.78)$) {\textbf{Battleship}};
+    \node[diagram table math, text width=4.10cm, minimum height=0.82cm] at ($(shared.north)+(0,0.86)$) {\textbf{Shared structure}};
+    \node[diagram table empirical, text width=3.85cm, minimum height=0.78cm] at ($(graphics.north)+(0,0.78)$) {\textbf{Sequential graphics}\\\textbf{and halftoning}};
+
+    \draw[diagram arrow] (battle.east) -- (shared.west);
+    \draw[diagram arrow] (graphics.west) -- (shared.east);
+
+    \node[diagram note, text width=9.90cm] at ($(shared.south)+(0,-1.35)$) {\textbf{Transfer path:} fixed hidden process shift in graphics-for-ML can be analyzed with the same latent-at-time-zero\\robustness lens used here for Battleship.};
+\end{tikzpicture}
+\caption{Conceptual transfer path from Battleship to sequential graphics tasks with fixed hidden process latents, such as halftoning or constrained rendering under unknown physical conditions.}
+\label{fig:diagram_transfer}
+\end{figure}
+\FloatBarrier
 
 There are also purely methodological next steps. One is to strengthen the defender in Stage 2 so that the empirical game comes closer to the exact best-response regime described by the theory. Another is to test whether the theorem-guided diagnostics can be made useful online, for instance as stopping criteria or adaptive budget-allocation signals during attacker-defender training. A third is to move beyond a single benchmark family. The current paper argues that Battleship is enough to make the latent-state structure exact and analyzable. A subsequent paper should test how much of the theory survives in other hidden-latent sequential tasks.
 
@@ -612,7 +923,7 @@ $\textsf{uniform\_drift}_k$ & Difference in expected shots-to-win on the nominal
 
 \subsection{Proof of the latent minimax principle}
 
-We prove Theorem 1 step by step.
+\noindent\textit{(S)} The horizon, action alphabet, observation alphabet, and latent set are finite, and the defender class $\Pset$ is a compact convex polytope. \textit{(G)} Reduce the attacker-defender interaction to a finite zero-sum game and then apply von Neumann's minimax theorem.
 
 Because the horizon $T_{\max}$ is finite and both the action and observation alphabets are finite, the number of feasible attacker histories is finite. A deterministic history-dependent attacker policy assigns to each such history a legal cell in the finite grid-action set. Therefore the number of deterministic history-dependent attacker policies is finite. Denote this finite set by $\Pi^{\det}$.
 
@@ -646,9 +957,11 @@ Because the game is finite and zero-sum, von Neumann's minimax theorem applies d
 =
 \max_{\rho\in\Pset}\min_{\mu\in\Delta(\Pi^{\det})}V(\mu,\rho).
 \]
-This proves the theorem.
+Thus the finite-history reduction supplies finitely many attacker pure strategies, the defender polytope supplies finitely many extreme-point pure strategies, and the bilinear payoff $V$ satisfies the hypotheses of von Neumann's theorem, proving the latent minimax equality.
 
 \subsection{Proof of the extreme-point corollary}
+
+\noindent\textit{(S)} Fix an attacker mixture $\mu$ and optimize only over the defender polytope $\Pset$. \textit{(G)} Show that the defender maximizer can be chosen at an extreme point because the payoff is linear in $\rho$.
 
 Fix an attacker mixture $\mu$. The map
 \[
@@ -661,6 +974,8 @@ V(\mu,\rho)=\sum_{\pi\in\Pi^{\det}}\sum_{z\in\Zset}\mu(\pi)\rho(z)L(\pi,z)
 is affine, hence linear up to the simplex constraint. A standard fact from convex analysis is that a linear functional over a compact convex polytope attains its maximum at an extreme point. Therefore the defender optimum is realized at an extreme point of $\Pset$.
 
 \subsection{Proof of the approximate best-response certificates}
+
+\noindent\textit{(S)} Assume $\rho_k$ is an $\varepsilon_D$-best response to $\pi_{k-1}$ and $\pi_k$ is an $\varepsilon_A$-best response to the mixture $\nu_k=\lambda\rho_k+(1-\lambda)\rho_U$. \textit{(G)} Derive the two diagnostic inequalities by comparison with the nominal defender $\rho_U$ and the previous attacker iterate $\pi_{k-1}$.
 
 We begin with the defender certificate.
 
@@ -719,9 +1034,11 @@ Subtract the two terms on the right-hand side from both sides. This yields
 (1-\lambda)\Big(\E_{\rho_U}[\tauT(\pi_k)]-\E_{\rho_U}[\tauT(\pi_{k-1})]\Big)
 \le \varepsilon_A.
 \]
-This is exactly the claimed weighted certificate inequality.
+The defender part follows from comparing the approximate defender response to the admissible nominal distribution $\rho_U$, and the attacker part follows from comparing the approximate attacker response to the admissible baseline policy $\pi_{k-1}$. Together these yield the two Stage-2 certificate inequalities.
 
 \subsection{Proof of finite-sample sign certification}
+
+\noindent\textit{(S)} The empirical episode lengths are independent and bounded in $[0,T_{\max}]$. \textit{(G)} Use Hoeffding's inequality and a union bound to derive confidence radii for the defender diagnostic and the weighted attacker residual, then convert those radii into sign-certification statements.
 
 We first prove the bound for the defender diagnostic.
 
@@ -840,8 +1157,11 @@ the same algebra as above gives
 \lambda(\eta_{X_1}+\eta_{X_2})+(1-\lambda)(\eta_{Y_1}+\eta_{Y_2}),
 \]
 which is exactly the weighted confidence radius stated in the theorem.
+Each diagnostic is a signed combination of bounded empirical means, so separate Hoeffding bounds plus a union bound produce explicit confidence radii. Whenever the observed empirical value lies outside its corresponding radius, the empirical sign agrees with the population sign on the high-probability event.
 
 \subsection{Proof of marginal insufficiency for fixed policies}
+
+\noindent\textit{(S)} Construct two distributions on a product latent space that agree on one-coordinate marginals but differ in their correlation structure. \textit{(G)} Exhibit a fixed deterministic attacker whose loss depends on that correlation, proving that one-coordinate marginals are insufficient.
 
 We prove the proposition by explicit construction.
 
@@ -902,8 +1222,11 @@ Thus
 \E_{\rho^{+}}[\tauT(\pi^{\mathrm{same}})] \neq \E_{\rho^{-}}[\tauT(\pi^{\mathrm{same}})],
 \]
 even though $\rho^{+}$ and $\rho^{-}$ have identical one-coordinate marginals. This proves that one-coordinate marginals are not sufficient to characterize adversarial hardness for fixed policies.
+The construction isolates the missing information in the joint dependence between $z_1$ and $z_2$: matching one-coordinate marginals does not prevent different expected losses for a fixed policy.
 
 \subsection{Proof of the supported weakly Pareto-optimality corollary}
+
+\noindent\textit{(S)} Let $\pi^\star$ minimize a weighted sum of adversarial and nominal losses with strictly positive weights. \textit{(G)} Rule out strict improvement in both objectives and then identify the supporting hyperplane exposed by the weighted sum.
 
 Let
 \[
